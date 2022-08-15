@@ -4,85 +4,85 @@ RSpec.describe TruckDriversController, type: :controller do
   let(:base_route) { 'truck_drivers/' }
   let(:random_employee_id) { Faker::Number.number(digits: 1) }
 
-  # describe "GET show" do
-  #   let(:truck_driver) { create(:employee) }
+  describe "GET show" do
+    let(:truck_driver) { create(:employee) }
 
-  #   context "when truck driver exists" do
-  #     it {
-  #       truck_driver
-  #       get :show, params: { use_route: base_route, id: truck_driver.id }
+    context "when truck driver exists" do
+      it {
+        truck_driver
+        get :show, params: { use_route: base_route, id: truck_driver.id }
 
-  #       expect(response.content_type).to eq('application/json')
-  #       expect(JSON.parse(response.body).keys).to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
-  #       expect(response).to have_http_status(:ok)
-  #     }
-  #   end
+        expect(response.content_type).to eq('application/json')
+        expect(JSON.parse(response.body).keys).to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
+        expect(response).to have_http_status(:ok)
+      }
+    end
 
-  #   context "when truck driver do not exists" do
-  #     it {
-  #       get :show, params: { use_route: base_route, id: random_employee_id }
+    context "when truck driver do not exists" do
+      it {
+        get :show, params: { use_route: base_route, id: random_employee_id }
 
-  #       expect(response.content_type).to eq('application/json')
-  #       expect(JSON.parse(response.body).keys).not_to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
-  #       expect(response).to have_http_status(202)
-  #     }
-  #   end
-  # end
+        expect(response.content_type).to eq('application/json')
+        expect(JSON.parse(response.body).keys).not_to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
+        expect(response).to have_http_status(202)
+      }
+    end
+  end
 
-  # describe "POST create" do
-  #   let(:truck_driver) { build(:employee) }
+  describe "POST create" do
+    let(:truck_driver) { build(:employee) }
 
-  #   context "when truck driver data is correcly" do
-  #     it {
-  #       post :create, params: { use_route: base_route, truck_driver: truck_driver.attributes }
-  #       expect(response.content_type).to eq('application/json')
-  #       expect(JSON.parse(response.body).keys).to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
-  #       expect(response).to have_http_status(:ok)
-  #     }
-  #   end
+    context "when truck driver data is correcly" do
+      it {
+        post :create, params: { use_route: base_route, truck_driver: truck_driver.attributes }
+        expect(response.content_type).to eq('application/json')
+        expect(JSON.parse(response.body).keys).to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
+        expect(response).to have_http_status(:ok)
+      }
+    end
 
-  #   context "when truck driver data isn't correcly" do
-  #     it {
-  #       post :create, params: { use_route: base_route, truck_driver: {} }
-  #       expect(response.content_type).to eq('application/json')
-  #       expect(JSON.parse(response.body).keys).not_to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
-  #       expect(response).to have_http_status(400)
-  #     }
-  #   end
-  # end
+    context "when truck driver data isn't correcly" do
+      it {
+        post :create, params: { use_route: base_route, truck_driver: {} }
+        expect(response.content_type).to eq('application/json')
+        expect(JSON.parse(response.body).keys).not_to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
+        expect(response).to have_http_status(400)
+      }
+    end
+  end
 
-  # describe "PUT update" do
-  #   let(:truck_driver) { create(:employee) }
-  #   let(:random_name) { Faker::Name.name }
-  #   let(:random_employee_id) { Faker::Internet.base64 }
+  describe "PUT update" do
+    let(:truck_driver) { create(:employee) }
+    let(:random_name) { Faker::Name.name }
+    let(:random_employee_id) { Faker::Internet.base64 }
     
-  #   let(:truck_driver_changed) { build(:employee, name: random_name, employee_code: random_employee_id) }
+    let(:truck_driver_changed) { build(:employee, name: random_name, employee_code: random_employee_id) }
 
-  #   context "when change some fields" do
-  #     it {
-  #       truck_driver
-  #       post :create, params: { use_route: base_route, truck_driver: truck_driver_changed.attributes, id: truck_driver.id }
-  #       expect(response.content_type).to eq('application/json')
-  #       expect(JSON.parse(response.body).keys).to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
-  #       expect(JSON.parse(response.body).symbolize_keys[:name]).to be = truck_driver_changed.name
-  #       expect(JSON.parse(response.body).symbolize_keys[:employee_code]).to be = truck_driver_changed.employee_code
-  #       expect(response).to have_http_status(:ok)
-  #     }
-  #   end
-  # end
+    context "when change some fields" do
+      it {
+        truck_driver
+        post :create, params: { use_route: base_route, truck_driver: truck_driver_changed.attributes, id: truck_driver.id }
+        expect(response.content_type).to eq('application/json')
+        expect(JSON.parse(response.body).keys).to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
+        expect(JSON.parse(response.body).symbolize_keys[:name]).to be = truck_driver_changed.name
+        expect(JSON.parse(response.body).symbolize_keys[:employee_code]).to be = truck_driver_changed.employee_code
+        expect(response).to have_http_status(:ok)
+      }
+    end
+  end
 
-  # describe "DELETE destroy" do
-  #   context "when deleted one truck driver" do
-  #     let(:truck_driver) { create(:employee) }
+  describe "DELETE destroy" do
+    context "when deleted one truck driver" do
+      let(:truck_driver) { create(:employee) }
 
-  #     it {
-  #       delete :destroy, params: { use_route: base_route, id: truck_driver.id }
-  #       expect(response.content_type).to eq('application/json')
-  #       expect(JSON.parse(response.body).keys).to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
-  #       expect(response).to have_http_status(:ok)
-  #     }
-  #   end
-  # end
+      it {
+        delete :destroy, params: { use_route: base_route, id: truck_driver.id }
+        expect(response.content_type).to eq('application/json')
+        expect(JSON.parse(response.body).keys).to match_array(['created_at', 'deleted_at', 'employee_code', 'id', 'name', 'updated_at'])
+        expect(response).to have_http_status(:ok)
+      }
+    end
+  end
 
   describe "GET filter deliveries of one truck driver" do
     let(:truck_driver_one) { create(:employee) }
